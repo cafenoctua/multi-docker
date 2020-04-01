@@ -3,20 +3,20 @@ suervices:
     - docker
 
 before_install:
-    - docker build -t bru/react-test -f ./client/Dockerfile.dev ./client
+    - docker build -t brubian/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-    - docker run bru/react-test npm test -- --coverage
+    - docker run brubian/react-test npm test -- --coverage
 
 after_success:
-    - docker build -t bru/multi-client ./client\
-    - docker build -t bru/multi-nginx ./nginx
-    - docker build -t bru/multi-server ./server
-    - docker build -t bru/multi-worker ./worker
+    - docker build -t brubian/multi-client ./client\
+    - docker build -t brubian/multi-nginx ./nginx
+    - docker build -t brubian/multi-server ./server
+    - docker build -t brubian/multi-worker ./worker
 
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-    - docker push bru/multi-client
-    - docker push bru/multi-nginx
-    - docker push bru/multi-server
-    - docker push bru/multi-worker
+    - docker push brubian/multi-client
+    - docker push brubian/multi-nginx
+    - docker push brubian/multi-server
+    - docker push brubian/multi-worker

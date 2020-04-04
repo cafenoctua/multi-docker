@@ -20,3 +20,15 @@ after_success:
     - docker push brubian/multi-nginx
     - docker push brubian/multi-server
     - docker push brubian/multi-worker
+
+deploy:
+    provider: elasticbeanstalk
+    region: ap-northeast-1
+    app: multi-docker
+    env: MultiDocker-env
+    bucket_name: elasticbeanstalk-ap-northeast-1-971360595391
+    bucket_path: docker-multi
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
